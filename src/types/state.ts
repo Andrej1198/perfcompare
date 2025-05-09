@@ -109,7 +109,12 @@ export type CompareResultsItem = {
   has_subtests: boolean;
 };
 
-export type CommitToHash = {
+export type HashToCommit = {
+  baseRevision: string;
+  newRevision: string;
+};
+
+export type LandoToCommit = {
   baseRevision: string;
   newRevision: string;
 };

@@ -1,7 +1,7 @@
 import { checkValues, getComparisonInformation } from './loader';
 import { compareView } from '../../common/constants';
 import { fetchRevisionFromHash } from '../../logic/treeherder';
-import { Changeset, CompareResultsItem, Repository } from '../../types/state';
+import { Changeset, CompareResultsItem, Repository, HashToCommit } from '../../types/state';
 import { Framework } from '../../types/types';
 
 // This function is responsible for fetching the data from the URL. It's called
@@ -26,7 +26,7 @@ export async function loader({ request }: { request: Request }) {
   const pushed_today =
     new Date(newHashDateFromUrl).toISOString().split('T')[0] ==
     new Date().toISOString().split('T')[0];
-  let commits_from_hashes: CommitFromHashData = {
+  let commits_from_hashes: HashToCommit = {
     baseRevision: '',
     newRevision: '',
   };
@@ -89,8 +89,4 @@ type HashLoaderData = {
   generation: number;
 };
 
-type CommitFromHashData = {
-  baseRevision: string;
-  newRevision: string;
-};
 export type HashLoaderReturnValue = HashLoaderData;

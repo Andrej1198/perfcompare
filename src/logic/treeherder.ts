@@ -5,13 +5,14 @@ import {
   CompareResultsItem,
   Repository,
   Changeset,
-  CommitToHash,
+  HashToCommit, LandoToCommit
 } from '../types/state';
 import { Framework, TimeRange } from '../types/types';
 
 // This file contains functions to request the Treeherder API
 
-export const treeherderBaseURL = 'https://treeherder.mozilla.org';
+// export const treeherderBaseURL = 'https://treeherder.mozilla.org';
+export const treeherderBaseURL = 'http://localhost:5000';
 
 type FetchProps = {
   baseRepo: Repository['name'];
@@ -64,7 +65,7 @@ export async function fetchRevisionFromHash(
   });
   const url = `${treeherderBaseURL}/api/project/${repo}/hash/tocommit/?${searchParams.toString()}`;
   const response = await fetchFromTreeherder(url);
-  return response.json() as Promise<CommitToHash>;
+  return response.json() as Promise<HashToCommit>;
 }
 
 async function fetchFromTreeherder(url: string) {
